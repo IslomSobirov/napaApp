@@ -1,0 +1,43 @@
+li #nav-item:hover {
+    color: yellow;
+    transition: .3s ease;
+}
+
+li #nav-item{
+    font-size: 1rem;
+    color: white;
+}
+.card .card-header{
+    border-bottom: 1px solid yellow;
+    color: white;
+    background: #343A40;
+}
+#app .navbar{
+    border-bottom: 2px solid yellow;
+}
+
+.input-group .form-control:focus {
+    color: #495057;
+    border: 1px solid yellow;
+    background-color: #fff;
+    /* border-color: #a1cbef; */
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgb(255, 255, 128);
+}
+.form-group .form-control:focus {
+    color: #495057;
+    border: 1px solid yellow;
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgb(255, 255, 128);
+}
+.form-group .custom-file .custom-file-label:focus{
+    color: #495057;
+    border: 1px solid yellow;
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgb(255, 255, 128);
+}
+
+.mySpan{
+    margin-top: 20px;
+    font-size: 10px;
+}

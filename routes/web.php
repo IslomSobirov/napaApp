@@ -20,6 +20,6 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::post('/createProfile', 'ProfileController@createProfile')->name('createProfile');
-
+Route::post('/pay', 'HomeController@pay');
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('refreshcaptcha', 'CaptchaController@refreshCaptcha');

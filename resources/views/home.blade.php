@@ -4,7 +4,7 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-12">
-            @if(!Auth()->user()->profile)
+            @if(Auth()->user()->profile)
             <div class="card">
                 <div class="card-header">Анкета</div>
 
@@ -171,20 +171,9 @@
                         </div>
                     </form>
 
-                    <form method="POST" action="https://test.paycom.uz/" target="_blank">
+                    
+        
 
-                        <input type="hidden" name="lang" value="ru" />
-                        <input type="hidden" name="callback_timeout" value="0" />
-                        <input type="hidden" name="callback" value="" />
-                        <input type="hidden" name="merchant" value="" />
-                        
-                        <input type="hidden" name="amount" value="50 000" />
-                        <input type="hidden" name="account[1]" value="COURSE_ID" />
-                        <button class="payme_button btn btn-default btn-xs has-ripple" type="submit">
-                            Оплатить через Payme
-                        </button>
-                        
-                    </form>
 
                 </div>
             </div>

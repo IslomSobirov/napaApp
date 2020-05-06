@@ -15,4 +15,11 @@ class Profile extends Model
     {
         return $this-belongsTo('App\User');
     }
+
+    public static function storeFile($file, $fileFolder)
+    {
+        $fileName = '_' . $fileFolder .time().'.'.$file->getClientOriginalExtension();
+        $file->storeAs($fileFolder, $fileName);
+        
+    }
 }

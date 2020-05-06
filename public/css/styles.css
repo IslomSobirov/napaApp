@@ -8,17 +8,17 @@ li #nav-item{
     color: white;
 }
 .card .card-header{
-    border-bottom: 1px solid yellow;
+    border-bottom: 1px solid rgb(209, 209, 0);;
     color: white;
     background: #343A40;
 }
 #app .navbar{
-    border-bottom: 2px solid yellow;
+    border-bottom: 2px solid rgb(211, 211, 90);
 }
 
 .input-group .form-control:focus {
     color: #495057;
-    border: 1px solid yellow;
+    border: 1px solid rgb(158, 158, 0);
     background-color: #fff;
     /* border-color: #a1cbef; */
     outline: 0;
@@ -28,7 +28,7 @@ li #nav-item{
     color: #495057;
     border: 1px solid yellow;
     outline: 0;
-    box-shadow: 0 0 0 0.2rem rgb(255, 255, 128);
+    box-shadow: 0 0 0 0.2rem rgb(235, 235, 87);
 }
 .form-group .custom-file .custom-file-label:focus{
     color: #495057;
@@ -40,4 +40,14 @@ li #nav-item{
 .mySpan{
     margin-top: 20px;
     font-size: 10px;
+}
+.nav-item .nav-link{
+    color: yellow;
+}
+.col-md-4 .card{
+    margin: 0px;
+}
+
+.card-body h5{
+    display:inline;
 }

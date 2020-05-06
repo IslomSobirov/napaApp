@@ -7,7 +7,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Napa Academy') }}</title>
+    <title>Napa Academy</title>
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
@@ -30,10 +30,21 @@
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-dark bg-dark shadow-sm">
             <div class="container-fluid">
-                <a class="navbar-brand" href="{{ url('/') }}">
-                    {{-- {{ config('app.name', 'Laravel') }} --}}
-                    <img width="55px" height="42px" src="{{asset('files/logo.png')}}" alt="Logo">
-                </a>
+                @if(auth()->user())
+                    @if(auth()->user()->isAdmin())
+                    <a class="navbar-brand" href="{{ url('/admin') }}">
+                        <img width="55px" height="42px" src="{{asset('files/logo.png')}}" alt="Logo">
+                    </a>
+                    @else
+                        <a class="navbar-brand" href="{{ url('/home') }}">
+                        <img width="55px" height="42px" src="{{asset('files/logo.png')}}" alt="Logo">
+                    </a>
+                    @endif
+                @else
+                    <a class="navbar-brand" href="{{ url('/login') }}">
+                        <img width="55px" height="42px" src="{{asset('files/logo.png')}}" alt="Logo">
+                    </a>
+                @endif
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -57,26 +68,39 @@
                                 </li>
                             @endif
                         @else
-                            <li class="nav-item">
-                                <a id="nav-item" class="nav-link" href="{{ route('home') }}">{{ __('Личный кабинет') }}</a>
-                            </li>
-                            <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }} {{Auth()->user()->surname}}<span class="caret"></span>
-                                </a>
-                                
-                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
+                            @if(!auth()->user()->isAdmin())
+                                <li class="nav-item">
+                                    <a id="nav-item" class="nav-link" href="{{ route('home') }}">
+                                        {{ __('Личный кабинет') }}
                                     </a>
-
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                        @csrf
-                                    </form>
-                                </div>
+                                </li>
+                            @else
+                                <li class="nav-item">
+                                    <a id="nav-item" class="nav-link" href="{{ route('admin') }}">
+                                        {{ __('Все пользователи') }}
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a id="nav-item" class="nav-link" href="/course">
+                                        {{ __('Все курсы') }}
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a id="nav-item" class="nav-link" href="/course/create">
+                                        {{ __('Создать курс') }}
+                                    </a>
+                                </li>
+                            @endif
+                            <li class="nav-item">
+                                <a style="cursor:pointer;" id="nav-item" class="nav-link" onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                    {{ __('Выйти из системы') }}
+                                </a>
                             </li>
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                    @csrf
+                                </form>
+                                
                         @endguest
                     </ul>
                 </div>

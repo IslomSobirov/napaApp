@@ -63,6 +63,8 @@ class ProfileController extends Controller
             ]);
         }
 
-        dd($porfile);
+        return redirect()
+                ->back()
+                ->with('msg', 'Анкета добавлено успешно!');
     }
 }

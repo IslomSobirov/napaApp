@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Course;
 
 class HomeController extends Controller
 {
@@ -23,11 +24,20 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $courses = Course::all();
+        return view('home', ['courses' => $courses]);
     }
 
-    public function refreshCaptcha()
+    public function settings()
     {
-        return response()->json(['captcha'=> captcha_img()]);
+        $user = auth()->user();
+        
+        return view('settings', ['user' => $user]);
+    }
+
+    public function course($id)
+    {
+        $course = Course::findOrFail($id);
+        return view('course', ['course' => $course]);
     }
 }

@@ -30,10 +30,14 @@ Route::post('/admin/userEdit/{id}', 'AdminController@userEdit')->name('userEdit'
 Route::get('/settings', 'HomeController@settings')->name('settings');
 Auth::routes();
 
+Route::post('/confirm', 'ProfileController@confirm')->name('confirm');
+Route::get('/sendSms', 'ProfileController@sendSms')->name('sendSms');
+
 Route::post('/createProfile', 'ProfileController@createProfile')->name('createProfile');
 Route::post('/pay', 'HomeController@pay');
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('refreshcaptcha', 'CaptchaController@refreshCaptcha');
+
 
 Route::resource('course', 'CourseController');
 Route::get('/course/{id}/show', 'HomeController@course');

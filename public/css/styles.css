@@ -51,3 +51,10 @@ li #nav-item{
 .card-body h5{
     display:inline;
 }
+
+.form-group a.btn{
+    color: white;
+}
+.form-group a.btn:hover{
+    color: white;
+}

@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 use App\Profile;
+use App\User;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Http;
 class ProfileController extends Controller
 {
     public function createProfile(Request $request)
@@ -63,8 +64,60 @@ class ProfileController extends Controller
             ]);
         }
 
+        
         return redirect()
                 ->back()
-                ->with('msg', 'Анкета добавлено успешно!');
+                ->with(['msg' => 'Анкета добавлено успешно!',]);
     }
+
+    public function confirm(Request $request)
+    {
+        $request->validate([
+            'smsFromUser' => 'required',
+            'randNumber' => 'required'
+        ]);
+        $randnumber = $request->randNumber;
+        $smsFromNumber = $request->smsFromUser;
+
+        if($randnumber === $smsFromNumber) {
+
+            $user = User::findOrFail(\Auth::user()->id);
+            $user->confirmedNumber = "yes";
+            $user->save();
+            return redirect()
+                    ->route('home')
+                    ->with([
+                        'msg' => 'Принято'
+                    ]);
+        }
+        else {
+            return redirect()
+                    ->route('home')
+                    ->with([
+                        'msg' => 'nope'
+                    ]);
+        }
+
+    }
+
+    public function sendSms()
+    {
+        $randnumber = rand(1000, 9999);
+        $response = Http::withBasicAuth('academy.napa.uz', 'Jsm2*12N@ps8')
+        ->post('http://91.204.239.44/broker-api/send', [
+            'messages' => [
+                'recipient' => auth()->user()->profile->number,
+                'message-id' => 'adc00000' .$randnumber,
+                'sms' => [
+                    'originator' => 3700,
+                    'content' => [
+                        'text' => $randnumber
+                    ]
+                ]
+            ]
+        ]);
+
+        return view('confirmNumber', ['randnumber' => $randnumber]);
+    }
+    
 }
